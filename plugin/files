@@ -1,1 +1,51 @@
-
+#!/bin/bash
+ne.fol() {
+	mkdir $1
+}
+ex.fol() {
+	rm -rf $1
+}
+ex.all() {
+	rm -rf *
+}
+ne.fil() {
+	touch $1
+}
+ex.fil() {
+	rm $1
+}
+re() {
+	cat $1
+}
+lns() {
+	nl $1
+}
+size.fil() {
+	truncate -s $1 $2
+}
+re.fol() {
+    if [ -d "$1" ]; then
+        if [ -d "$2" ]; then
+            echo "The folder name to be changed already exists!"
+            exit
+        else
+            mv "$1" "$2"
+        fi
+    else
+        echo "The folder to be renamed does not exist!"
+        exit
+    fi
+}
+re.fil() {
+    if [ -e "$1" ]; then
+        if [ -e "$2" ]; then
+            echo "The file that needs to be renamed already exists"
+            exit
+        else
+            mv "$1" "$2"
+        fi
+    else
+        echo "The file that needs to be renamed does not exist!"
+        exit
+    fi
+}
