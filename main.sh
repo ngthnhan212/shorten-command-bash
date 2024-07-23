@@ -2084,10 +2084,10 @@ mfn.pwd() {
 	echo "$pwd"
 }
 set() {
-	export $1="$2"
+	export "$1" "$2" > /dev/null 2>&1
 }
 new() {
-	declare -x $1="$2"
+	declare -x "$1"="$2"
 }
 colors_0() {
         tput setaf 0
@@ -3624,4 +3624,33 @@ colors.tab_254() {
 }
 colors.tab_255() {
         tput setab 255
+}
+colors_close() {
+	tput setaf 255
+}
+mfn.not() {
+	echo "'$1'"
+}
+put() {
+	if read -p "$1" "$2"
+	then
+		:
+	else
+		if [[ "$1" == "" || "$2" == "" ]]
+		then
+			echo "Please give variable name, and content"
+			exit
+		fi
+	fi
+}
+shopt -s expand_aliases
+alias func="function"
+alias auto="while"
+alias now=do
+alias end=done
+alias {="then"
+alias }="fi"
+alias hide="/dev/null 2>&1"
+mfn.setname() {
+	echo -e "\033]0;$1\007"
 }
