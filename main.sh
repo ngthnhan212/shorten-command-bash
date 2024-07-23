@@ -3650,7 +3650,20 @@ alias now=do
 alias end=done
 alias {="then"
 alias }="fi"
+alias ?="#"
 alias hide="/dev/null 2>&1"
 mfn.setname() {
 	echo -e "\033]0;$1\007"
+}
+mfn.write() {
+	if [ -e "$2" ]
+	then
+		echo "The file to write does not exist!"
+		exit
+	else
+		echo "$1" > "$2"
+	fi
+}
+mfn.writes() {
+	echo "$1" > "$2"
 }
