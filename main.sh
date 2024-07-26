@@ -3648,12 +3648,16 @@ alias func="function"
 alias auto="while"
 alias now=do
 alias end=done
-alias {="then"
-alias }="fi"
+alias {{="then"
+alias }}="fi"
+alias and=";;"
 alias ?="#"
 alias hide="/dev/null 2>&1"
 mfn.setname() {
 	echo -e "\033]0;$1\007"
+}
+mfn.exitname() {
+	echo -e "\033]0;\007"
 }
 mfn.write() {
 	if [ -e "$2" ]
@@ -3666,4 +3670,209 @@ mfn.write() {
 }
 mfn.writes() {
 	echo "$1" > "$2"
+}
+log.cmd() {
+	nohup $1 > log.txt
+}
+log.file() {
+	nohup $1 > $2
+}
+yet() {
+	loop $1
+}
+alias ends="esac"
+un.var() {
+	unset $1
+}
+mfn.h() {
+	echo "Hydrogen (H)"
+}
+mfn.cyclic_tables() {
+	echo """
+1. Hydrogen
+2. Helium
+3. Lithium
+4. Beryllium
+5. Boron
+6. Carbon
+7. Nitrogen
+8. Oxygen
+9. Fluorine
+10. Neon
+11. Sodium
+12. Magnesium
+13. Aluminum
+14. Silicon
+15. Phosphorus
+16. Sulfur
+17. Chlorine
+18. Argon
+19. Potassium
+20. Calcium
+21. Scandium
+22. Titanium
+23. Vanadium
+24. Chromium
+25. Manganese
+26. Iron
+27. Cobalt
+28. Nickel
+29. Copper
+30. Zinc
+31. Gallium
+32. Germanium
+33. Arsenic
+34. Selenium
+35. Bromine
+36. Krypton
+37. Rubidium
+38. Strontium
+39. Yttrium
+40. Zirconium
+41. Niobium
+42. Molybdenum
+43. Technetium
+44. Ruthenium
+45. Rhodium
+46. Palladium
+47. Silver
+48. Cadmium
+49. Indium
+50. Tin
+51. Antimony
+52. Tellurium
+53. Iodine
+54. Xenon
+55. Cesium
+56. Barium
+57. Lanthanum
+58. Cerium
+59. Praseodymium
+60. Neodymium
+61. Promethium
+62. Samarium
+63. Europium
+64. Gadolinium
+65. Terbium
+66. Dysprosium
+67. Holmium
+68. Erbium
+69. Thulium
+70. Ytterbium
+71. Lutetium
+72. Hafnium
+73. Tantalum
+74. Tungsten
+75. Rhenium
+76. Osmium
+77. Iridium
+78. Platinum
+79. Gold
+80. Mercury
+81. Thallium
+82. Lead
+83. Bismuth
+84. Polonium
+85. Astatine
+86. Radon
+87. Francium
+88. Radium
+89. Actinium
+90. Thorium
+91. Protactinium
+92. Uranium
+93. Neptunium
+94. Plutonium
+95. Americium
+96. Curium
+97. Berkelium
+98. Californium
+99. Einsteinium
+100. Fermium
+101. Mendelevium
+102. Nobelium
+103. Lawrencium
+104. Rutherfordium
+105. Dubnium
+106. Seaborgium
+107. Bohrium
+108. Hassium
+109. Meitnerium
+110. Darmstadtium
+111. Roentgenium
+112. Copernicium
+113. Nihonium
+114. Flerovium
+115. Moscovium
+116. Livermorium
+117. Tennessine
+118. Oganesson"""
+}
+alias *define="alias"
+math.+() {
+	echo "$(( $1 + $2))"
+}
+math.-() {
+	echo "$(( $1 - $2))"
+}
+math.*() {
+	echo "$(( $1 * $2))"
+}
+math./() {
+	echo "$(( $1 / $2))"
+}
+sys.dieall() {
+	pkill ".*"
+}
+sys.killname() {
+	pkill "$1"
+}
+mfn.red() {
+	tput setaf 9
+	echo "$1"
+}
+mfn.green() {
+	tput setaf 10
+	echo "$1"
+}
+mfn.yellow() {
+	tput setaf 11
+	echo "$1"
+}
+mfn.blue() {
+	tput setaf 12
+	echo "$1"
+}
+mfn.pink() {
+	tput setaf 13
+	echo "$1"
+}
+mfn.bluev2() {
+	tput setaf 14
+	echo "$1"
+}
+mfn.white() {
+	tput setaf 15
+	echo "$1"
+}
+mfn.black() {
+	tput setaf 16
+	echo "$1"
+}
+mfn.by() {
+	echo "
+Người sáng lập: Nguyễn thành nhân
+Sinh ngày: 15/2/2012
+Cơ trú: Hà nội
+"
+	exit
+}
+our() {
+	exit
+}
+mfn.key() {
+	mcookie
+}
+callback() {
+	export $1="$2"
 }
