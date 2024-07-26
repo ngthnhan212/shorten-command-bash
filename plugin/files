@@ -1,27 +1,73 @@
 #!/bin/bash
+# File: files
+# Copyright: Nguyen Thanh Nhan
+# Package: shorten-command-bash
+# Made from 2024
 ne.fol() {
-	mkdir $1
+	if [ -d "$1" ]
+	then
+		echo "  Directory already exists!, Folder already exists!"
+		exit
+	else
+		mkdir $1
+	fi
 }
 ex.fol() {
-	rm -rf $1
+	if [ -d "$1" ]
+	then
+		rm -rf $1
+	else
+		echo "The directory does not exist, Folder does not exist"
+		exit
+	fi
 }
 ex.all() {
 	rm -rf *
 }
 ne.fil() {
-	touch $1
+	if [ -e "$1" ]
+	then
+		echo "Files already exist, cannot create more!, Files already exist, no more can be created!"
+		exit
+	else
+		touch $1
+	fi
 }
 ex.fil() {
-	rm $1
+	if [ -e "$1" ]
+	then
+		rm $1
+	else
+		echo "Files does not exist!, Files don't exist!"
+		exit
+	fi
 }
 re() {
-	cat $1
+	if [ -e "$1" ]
+	then
+		cat $1
+	else
+		echo "Files does not exist!, Files don't exist!"
+		exit
+	fi
 }
 lns() {
-	nl $1
+	if [ -e "$1" ]
+	then
+		nl $1
+	else
+		echo "Files does not exist!, Files don't exist!"
+		exit
+	fi
 }
 size.fil() {
-	truncate -s $1 $2
+	if [ -e "$1" ]
+	then
+		truncate -s $1 $2
+	else
+		echo "Files does not exist!, Files don't exist!"
+		exit
+	fi
 }
 re.fol() {
     if [ -d "$1" ]; then
@@ -48,4 +94,128 @@ re.fil() {
         echo "The file that needs to be renamed does not exist!"
         exit
     fi
+}
+re.fil_lines() {
+	if [ -e "$1" ]
+	then
+		:
+	else
+		echo "The file to read does not exist!"
+		exit
+	fi
+	if [ "$(cat $1 | sed -n "$2p")" == "" ]
+	then
+		echo "The line to read does not exist!"
+		exit
+	else
+		cat $1 | sed -n "$2p"
+	fi
+}
+only.read_run() {
+	if [ -e "$1" ]
+	then
+		chmod 411 "$1"
+	else
+		echo "Flies don't exist!"
+		exit
+	fi
+}
+fil_normal() {
+	if [ -e "$1" ]
+	then
+		chmod 777 "$1"
+	else
+		echo "Flies don't exist!"
+		exit
+	fi
+}
+fil_duff() {
+	if [ -e "$1" ]
+	then
+		chmod 000 "$1"
+	else
+		echo "Flies don't exist!"
+		exit
+	fi
+}
+only.write() {
+	if [ -e "$1" ]
+	then
+		chmod 222 "$1"
+	else
+		echo "Flies don't exist!"
+		exit
+	fi
+}
+only.write_run() {
+	if [ -e "$1" ]
+	then
+		chmod 333 "$1"
+	else
+		echo "Flies don't exist!"
+		exit
+	fi
+}
+only.read() {
+	if [ -e "$1" ]
+	then
+		chmod 444 "$1"
+	else
+		echo "Flies don't exist!"
+		exit
+	fi
+}
+read.char() {
+	if [ -e "$1" ]
+	then
+		head -c "$1"
+	else
+		echo "Flies don't exist!"
+		exit
+	fi
+}
+filter.fil() {
+	if [ -e "$2" ]
+	then
+		grep -e "$1" "$2"
+	else
+		echo "Files does not exist, Files don't exist"
+		exit
+	fi
+}
+read.all() {
+	ls
+}
+read.hide() {
+	ls -a
+}
+read.size() {
+	ls -l
+}
+help.libary() {
+	echo "
+ Basic documentation about files, Basic documentation about file folders
+	ne.fol - Create a new directory
+	ex.fol - Delete a folder, Delete a directory
+	ex.all - Delete everything in a folder, it will have limited space to delete, Delete everything in a folder, there will be a limit to where it can be deleted
+	ne.fil - Create a new file
+	ex.fil - Delete a file, Deleting a file
+	re - Read everything in a file, Read everything contained in a file
+	lns - Reads everything in a file that has the following line, Reads everything in a file that has a current line
+	size.fil - Increase or decrease the size of a file but still make it bootable
+	re.fol - Change the name of a folder, Rename a folder
+	re.fil - Change the name of a file, Rename a file
+	re.fil_lines - Read the contents of a file but line by line, Read the contents of a file but by line
+	only.read_run - Turns a normal file into a read-only and run-only file, Turns a normal file into a file that can only be read and run
+	fil_normal - Turn a file back to normal, or run ./[filename], Return a file to normal, or run ./[filename]
+	fil_duff - Turns a normal file into a corrupted file, Turns a normal file into a damaged file
+	only.write - Turns a normal file into writing only in that file, Turns a normal file into only being written in that file
+	only.write_run - Turn a normal file into just write and run, Turns a normal file into just writing and running
+	only.read - Turn a normal file into read-only, Makes a normal file read-only
+	read.char - Read the contents of the file
+	filter.fil - Filter out related words in a file, Filter out relevant words in a file
+	read.all - View all from a folder, files contained in that folder, View all folders and files in that folder
+	read.hide -  View all folders, files in that folder, and show all hidden folders and hidden files, View all from a folder, files contained in that folder, and show all hidden folders and hidden files
+	read.size - View all from a folder, files contained in that folder, along with size, View all from the folder, files in that folder with size
+	"
 }
