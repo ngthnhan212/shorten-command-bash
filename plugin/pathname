@@ -1,0 +1,57 @@
+#!/bin/bash
+# File: pathname
+# Copyright: Nguyen Thanh Nhan
+# Package: shorten-command-bash
+# Made from 2024
+get.now() {
+	pwd
+}
+get.pathname() {
+	echo $0
+}
+read.one() {
+	ls ./
+}
+read.two() {
+	ls ../
+}
+get.home() {
+	echo $HOME
+}
+get.sys() {
+	echo $SHELL
+}
+read.home() {
+	ls $HOME
+}
+read.file_now() {
+	if [ "$1" == "" ]
+	then
+		echo "The file name cannot be left blank"
+		exit
+	else
+		ls | grep "$1"
+	fi
+}
+read.file_fol() {
+	if [ "$1" == "" ]
+	then
+		echo "The directory section cannot be left blank!"
+	fi
+	check=(ls $1)
+	if [ "$check" == "ls: cannot access '"$1"': No such file or directory" ]
+	then
+		echo "Directory does not exist!"
+		exit
+	fi
+	if [ "$2" == "" ]
+	then
+		echo "The file extension cannot be left blank!"
+	fi
+	checkfile=$(ls $1 | grep "$2")
+	if [ "$checkfile" == "" ]
+	then
+		echo "There is no file with extension ".$2" in directory "$1""
+	fi
+	ls $1 | grep "$2"
+}
